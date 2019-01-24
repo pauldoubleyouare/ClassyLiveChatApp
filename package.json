@@ -1,0 +1,17 @@
+{
+  "name": "classylivechat",
+  "version": "1.0.0",
+  "description": "Classy LiveChat App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.16.4",
+    "mongo": "^0.1.0",
+    "mongoose": "^5.4.6",
+    "node": "^11.7.0"
+  }
+}
