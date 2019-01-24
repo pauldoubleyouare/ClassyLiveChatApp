@@ -16,5 +16,8 @@
     "mongo": "^0.1.0",
     "mongoose": "^5.4.6",
     "node": "^11.7.0"
+  },
+  "dependencies": {
+    "livechatapi": "^0.6.0"
   }
 }
