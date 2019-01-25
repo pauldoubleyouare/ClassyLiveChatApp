@@ -8,7 +8,7 @@ const morgan = require('morgan');
 
 mongoose.Promise = global.Promise;
 
-const { PORT } = require('./config');
+const { DATABASE_URL, PORT } = require('./config');
 
 const app = express();
 
@@ -25,7 +25,43 @@ app.use(express.json());
 
 let server;
 
-function runServer() {}
+function runServer(databaseUrl = DATABASE_URL, port = PORT) {
+  return new Promise((resolve, reject) => {
+    mongoose.connect(
+      databaseUrl, err => {
+        if (err) {
+          return reject(err);
+        }
+        server = app
+          .listen(port, () => {
+            console.log(`App is listening on port ${port}`);
+            resolve();
+          })
+          .on('error', err => {
+            mongoose.disconnect();
+            reject(err);
+          });
+      }
+    );
+  });
+}
 
-function closeServer() {}
+function closeServer() {
+  return mongoose.disconnect().then(() => {
+    return new Promise((resolve, reject) => {
+      console.log('Closing server');
+      server.close(err => {
+        if (err) {
+          return reject(err);
+        }
+        resolve();
+      });
+    });
+  });
+}
 
+if (require.main === module) {
+  runServer().catch(err => console.err(err));
+}
+
+module.exports = { app, runServer, closeServer };
