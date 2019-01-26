@@ -8,9 +8,11 @@ const morgan = require('morgan');
 
 mongoose.Promise = global.Promise;
 
-const { DATABASE_URL, PORT } = require('./config');
+const { DATABASE_URL, PORT } = require('./config.js');
 
 const app = express();
+
+app.use(morgan('common'));
 
 //Static webserver
 app.use(express.static('public'));
@@ -22,6 +24,16 @@ app.use(express.json());
 - Add Routes && Protected rputes
 - Add custom error handler
 */
+
+app.use((err, req, res, next) => {
+  if (err.status) {
+    const errBody = Object.assign({}, err, { message: err.message });
+    res.status(err.status).json(errBody);
+  } else {
+    res.status(500).json({ message: 'Internal Server Error'});
+    console.error(err);
+  }
+});
 
 let server;
 
@@ -61,7 +73,7 @@ function closeServer() {
 }
 
 if (require.main === module) {
-  runServer().catch(err => console.err(err));
+  runServer().catch(err => console.error(err));
 }
 
 module.exports = { app, runServer, closeServer };

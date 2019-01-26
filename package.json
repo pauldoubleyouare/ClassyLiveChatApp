@@ -2,24 +2,29 @@
   "name": "classylivechat",
   "version": "1.0.0",
   "description": "Classy LiveChat App",
-  "main": "index.js",
-  "scripts": {
-    "test": "mocha"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "chai-http": "^4.2.1",
+  "main": "server.js",
+  "dependencies": {
     "express": "^4.16.4",
-    "mocha": "^5.2.0",
+    "dotenv": "^6.2.0",
+    "livechatapi": "^0.6.0",
+    "morgan": "^1.9.1",
     "mongo": "^0.1.0",
     "mongoose": "^5.4.6",
     "node": "^11.7.0"
   },
-  "dependencies": {
-    "dotenv": "^6.2.0",
-    "livechatapi": "^0.6.0",
-    "morgan": "^1.9.1"
-  }
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pauldoubleyouare/ClassyLiveChatApp.git"
+  },
+  "author": "",
+  "license": "ISC"
 }
